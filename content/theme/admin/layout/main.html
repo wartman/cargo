@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>Rabbit</title>
+</head>
+
+<body>
+  <nav class="navbar-primary">
+    {% block navigation %}
+      <ul>
+        <li>
+          <a href="/admin">Home</a>
+        </li>
+        <li>
+          <a href="/admin/project">Projects</a>
+        </li>
+        <li>
+          <a href="/admin/category">Categories</a>
+        </li>
+      </ul>
+    {% endblock %}
+  </nav>
+
+  {% block body %}{% endblock %}
+</body>
+
+</html>

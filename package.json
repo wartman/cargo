@@ -1,0 +1,43 @@
+{
+  "name": "rabbit",
+  "version": "0.0.0",
+  "description": "A portfolio site",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wartman/rabbit.git"
+  },
+  "keywords": [
+    "cms",
+    "express",
+    "portfolio"
+  ],
+  "author": "wartman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wartman/rabbit/issues"
+  },
+  "homepage": "https://github.com/wartman/rabbit",
+  "dependencies": {
+    "bcryptjs": "~2.0.2",
+    "swig": "~1.4.2",
+    "express": "~4.8.4",
+    "bookshelf": "~0.7.7",
+    "when": "~3.4.4",
+    "node-uuid": "~1.4.1",
+    "body-parser": "~1.6.5",
+    "moment": "~2.8.2"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.7",
+    "gulp-stylus": "~1.3.0",
+    "lodash": "~2.4.1",
+    "gulp-mocha": "~1.0.0",
+    "chai": "~1.9.1",
+    "modus": "~0.2.0",
+    "knex": "~0.6.22"
+  }
+}

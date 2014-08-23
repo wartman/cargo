@@ -1,0 +1,16 @@
+{% extends '../layout/main.html' %}
+
+{% block body %}
+
+  <ul>
+    {% for category in categories %}
+      <li>
+        <a href="/admin/category/edit/{{category.get('id')}}">{{category.get('name')}}</a>
+      </li>
+    {% endfor %}
+    <li>
+      <a href="/admin/category/new">Add New Category</a>
+    </li>
+  </ul>
+
+{% endblock %}

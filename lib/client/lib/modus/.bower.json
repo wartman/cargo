@@ -1,0 +1,35 @@
+{
+  "name": "modus",
+  "version": "0.2.3",
+  "authors": [
+    "Peter Wartman"
+  ],
+  "description": "Modules for the web",
+  "main": "modus.js",
+  "keywords": [
+    "module",
+    "loader"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bin",
+    "src",
+    "Gruntfile.js",
+    "package.json",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/wartman/modus",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.3",
+    "commit": "6de714d0556fb4e0d87eedc1a5d1a09e27527d17"
+  },
+  "_source": "git://github.com/wartman/modus.git",
+  "_target": "~0.2.0",
+  "_originalSource": "modus"
+}

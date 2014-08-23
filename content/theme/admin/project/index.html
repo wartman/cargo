@@ -1,0 +1,16 @@
+{% extends '../layout/main.html' %}
+
+{% block body %}
+
+  <ul>
+    {% for project in projects %}
+      <li>
+        <a href="/admin/project/edit/{{project.get('id')}}">{{project.get('title')}}</a>
+      </li>
+    {% endfor %}
+    <li>
+      <a href="/admin/project/new">Add New Project</a>
+    </li>
+  </ul>
+
+{% endblock %}
