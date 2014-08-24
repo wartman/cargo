@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
-var rabbitDb = require('./lib/server/db');
+var models = require('./lib/server/models');
 var config = require('./config');
 
 gulp.task('test', function () {
@@ -12,8 +12,7 @@ gulp.task('test', function () {
 // Initialize Rabbit.
 gulp.task('init', function () {
   // Create the database.
-  var db = rabbitDb.getInstance();
-  db.create();
+  models.install();
 })
 
 gulp.task('default', ['test']);

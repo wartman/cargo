@@ -26,10 +26,11 @@
     "swig": "~1.4.2",
     "express": "~4.8.4",
     "bookshelf": "~0.7.7",
-    "when": "~3.4.4",
     "node-uuid": "~1.4.1",
     "body-parser": "~1.6.5",
-    "moment": "~2.8.2"
+    "moment": "~2.8.2",
+    "validator": "~3.17.0",
+    "bluebird": "~2.3.1"
   },
   "devDependencies": {
     "gulp": "~3.8.7",
