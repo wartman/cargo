@@ -21,6 +21,21 @@ describe('Base', function () {
       expect(actual.bar).to.equal('extended');
     });
 
+    it('extends static properties', function () {
+      var Foo = Base.extend({
+        // blank
+      }, {
+        foo: 'foo'
+      });
+      var Bar = Foo.extend({
+        // blank
+      }, {
+        bar: 'bar'
+      });
+      expect(Bar.foo).to.equal('foo');
+      expect(Bar.bar).to.equal('bar');
+    });
+
     it('defines constructors', function () {
       var Foo = Base.extend({
         constructor: function (name) {
