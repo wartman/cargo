@@ -1,5 +1,5 @@
-var Base = require('../../../../lib/both/util/base');
-var mixins = require('../../../../lib/both/util/mixins');
+var Base = require('../../../../lib/both/oop/base');
+var mixins = require('../../../../lib/both/oop/mixins');
 var expect = require('chai').expect;
 
 describe('mixins.singleton', function () {

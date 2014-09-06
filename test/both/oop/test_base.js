@@ -1,4 +1,4 @@
-var Base = require('../../../lib/both/util/base');
+var Base = require('../../../lib/both/oop/base');
 var expect = require('chai').expect;
 
 describe('Base', function () {
@@ -46,6 +46,16 @@ describe('Base', function () {
       expect(actual.foo).to.equal('bar');
     });
 
+    it('can use functions', function () {
+      var Foo = Base.extend(function () {
+        this.foo = function () {
+          return 'foo'
+        }
+      });
+      var actual = new Foo();
+      expect(actual.foo()).to.equal('foo');
+    });
+
   });
 
   describe('#mixin', function () {
@@ -70,13 +80,38 @@ describe('Base', function () {
 
   });
 
-  describe('#addProperty', function () {
+  describe('#mixinStatic', function () {
+      
+    it('adds class properties', function () {
+      var Foo = Base.extend({
+        foo: 'foo'
+      }, {
+        foo: 'foo'
+      });
+      var Bar = Foo.extend({
+        bar: 'bar'
+      });
+      Bar.mixinStatic({
+        foo: 'bar'
+      }, {
+        bar: 'bar'
+      });
+      expect(Bar.foo).to.equal('bar');
+      expect(Bar.bar).to.equal('bar');
+    });
+
+  });
+
+  describe('#set', function () {
 
     it('binds `this.sup` to parent method', function () {
-      // addProperty is used internally by the extend method.
+      // set is used internally by the extend method.
       var Foo = Base.extend({
         foo: function (name) {
           return 'sub: ' + name;
+        },
+        bar: function () {
+          return 'bar';
         }
       });
       var Bar = Foo.extend({
@@ -84,10 +119,14 @@ describe('Base', function () {
           return this.sup(name) + ' extended';
         }
       });
+      Bar.set('bar', function () {
+        return this.sup() + ' extended';
+      });
       var actual = new Bar();
       expect(actual.foo('hi')).to.equal('sub: hi extended');
+      expect(actual.bar()).to.equal('bar extended');
     });
 
   });
 
-})
+});
