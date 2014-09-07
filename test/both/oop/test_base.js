@@ -61,16 +61,6 @@ describe('Base', function () {
       expect(actual.foo).to.equal('bar');
     });
 
-    it('can use functions', function () {
-      var Foo = Base.extend(function () {
-        this.foo = function () {
-          return 'foo'
-        }
-      });
-      var actual = new Foo();
-      expect(actual.foo()).to.equal('foo');
-    });
-
   });
 
   describe('#mixin', function () {
