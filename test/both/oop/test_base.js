@@ -61,6 +61,21 @@ describe('Base', function () {
       expect(actual.foo).to.equal('bar');
     });
 
+    it('binds sup in constructors', function () {
+      var Foo = Base.extend({
+        constructor: function () {
+          this.foo = 'foo'
+        }
+      });
+      var Bar = Foo.extend({
+        constructor: function () {
+          this.sup();
+        }
+      });
+      var actual = new Bar();
+      expect(actual.foo).to.equal('foo');
+    });
+
   });
 
   describe('#mixin', function () {
@@ -124,10 +139,10 @@ describe('Base', function () {
           return this.sup(name) + ' extended';
         }
       });
-      Bar.set('bar', function () {
+      var actual = new Bar();
+      actual.set('bar', function () {
         return this.sup() + ' extended';
       });
-      var actual = new Bar();
       expect(actual.foo('hi')).to.equal('sub: hi extended');
       expect(actual.bar()).to.equal('bar extended');
     });

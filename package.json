@@ -23,15 +23,16 @@
   "homepage": "https://github.com/wartman/rabbit",
   "dependencies": {
     "bcryptjs": "~2.0.2",
-    "swig": "~1.4.2",
-    "express": "~4.8.4",
-    "bookshelf": "~0.7.7",
-    "node-uuid": "~1.4.1",
-    "body-parser": "~1.6.5",
-    "moment": "~2.8.2",
-    "validator": "~3.17.0",
     "bluebird": "~2.3.1",
-    "colors": "~0.6.2"
+    "body-parser": "~1.6.5",
+    "bookshelf": "~0.7.7",
+    "colors": "~0.6.2",
+    "express": "~4.8.4",
+    "moment": "~2.8.2",
+    "node-uuid": "~1.4.1",
+    "sqlite3": "^2.2.7",
+    "swig": "~1.4.2",
+    "validator": "~3.17.0"
   },
   "devDependencies": {
     "gulp": "~3.8.7",
