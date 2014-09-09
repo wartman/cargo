@@ -1,6 +1,6 @@
 {
   "name": "rabbit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A portfolio site",
   "main": "index.js",
   "scripts": {

@@ -1,6 +1,6 @@
 var Rabbit = require('./lib/server/rabbit');
 
-new Rabbit({
+Rabbit({
   baseDir: __dirname + '/',
   themesDir: 'content/theme',
 }).run();
