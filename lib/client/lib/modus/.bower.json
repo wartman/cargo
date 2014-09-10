@@ -1,6 +1,6 @@
 {
   "name": "modus",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "authors": [
     "Peter Wartman"
   ],
@@ -23,13 +23,13 @@
     "tests"
   ],
   "homepage": "https://github.com/wartman/modus",
-  "_release": "0.2.3",
+  "_release": "0.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.3",
-    "commit": "6de714d0556fb4e0d87eedc1a5d1a09e27527d17"
+    "tag": "v0.3.0",
+    "commit": "7cd64b30d5e13fd755309b8bfdf6b80dcc107bad"
   },
   "_source": "git://github.com/wartman/modus.git",
-  "_target": "~0.2.0",
+  "_target": "~0.3.0",
   "_originalSource": "modus"
 }
