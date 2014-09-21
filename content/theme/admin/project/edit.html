@@ -1,6 +1,5 @@
 {% extends '../layout/main.html' %}
 
-
 {% block navigation %}
   {% parent %}
   <ul>
@@ -11,37 +10,5 @@
 {% endblock %}
 
 {% block body %}
-  <form method="post" action="/admin/project{% if project.get('id') %}/edit/{{project.id}}{%else%}/new{% endif %}">
-
-    <ul>
-      <li>
-        <label for="title">Title</label>
-        <input type="text" name="title" value="{{project.get('title')||''}}">
-      </li>
-      <li>
-        <label for="slug">Slug</label>
-        <input type="text" name="slug" value="{{project.get('slug')||''}}">
-      </li>
-      <li>
-        <label for="attachment">Attachment</label>
-        <input type="text" name="attachment" value="{{project.get('attachment')||''}}">
-      </li>
-      <li>
-        <label for="description">Description</label>
-        <input type="text" name="description" value="{{project.get('description')||''}}">
-      </li>
-      <li>
-        <label for="category">Category</label>
-        <select name="category_id">
-          {% for category in categories %}
-            <option value="{{category.get('id')}}">{{category.get('name')}}</option>
-          {% endfor %}
-        </select>
-      </li>
-      <li>
-        <button type="submit">Save</button>
-      </li>
-    </ul>
-
-  </form>
+  {% include './form.html' %}
 {% endblock %}

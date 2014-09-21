@@ -1,0 +1,17 @@
+<div class="grid">
+
+  {% block grid-content %}
+
+    {% if items %}
+
+      {% for item in items %}
+        <article class="grid-item">
+          {% include './item.html' %}
+        </article>
+      {% endfor %}
+      
+    {% endif %}
+
+  {% endblock %}
+
+</div>
