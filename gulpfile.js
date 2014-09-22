@@ -5,8 +5,10 @@ var config = require('./config');
 
 gulp.task('test', function () {
   return gulp
-    .src('test/**/test_*.js', {read: false})
-    .pipe(mocha({reporter: 'spec'}));
+    .src([
+      'lib/both/test/**/test_*.js', 
+      'lib/server/test/**/test_*.js'
+    ], {read: false}).pipe(mocha({reporter: 'spec'}));
 });
 
 // Initialize Rabbit.

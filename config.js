@@ -26,6 +26,23 @@ var config = {
     }
   },
 
+  testing: {
+    database: {
+      client: 'sqlite3',
+      connection: {
+        filename: path.join(__dirname, '/content/data/rabbit-testing.db')
+      },
+      debug: true
+    },
+    server: {
+      host: 'localhost',
+      port: '8080'
+    },
+    paths: {
+      content: path.join(__dirname, '/content/')
+    }
+  },
+
   production: {
     database: {
       client: 'sqlite3',
