@@ -1,0 +1,11 @@
+<header class="modal-header">
+  {% block modal-header %}
+    <h1 class="modal-header-title">{{title|default('Alert')}}</h1>
+    <i class="modal-header-close ev-close"></i>
+  {% endblock %}
+</header>
+
+<section class="modal-body">
+  {% block modal-body %}
+  {% endblock %}
+</section>

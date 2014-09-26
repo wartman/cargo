@@ -1,7 +1,7 @@
-<form 
+<form
   method="post"
   class="project-form"
-  id="project-form-{{project.get('id')}}" 
+  id="project-form-{{project.get('id')}}"
   action="/admin/project{% if project.get('id') %}/edit/{{project.id}}{%else%}/new{% endif %}">
 
   <ul>
