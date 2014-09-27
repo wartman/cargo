@@ -1,8 +1,30 @@
+var fs = require('fs');
+var path = require('path');
+
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
-var models = require('./lib/server/models');
+var stylus = require('gulp-stylus');
+var merge = require('merge-stream');
 var config = require('./config');
 
+var ModusBuild = require('modus/lib/build');
+
+// Helpers
+// -------
+
+// Get folders in the specified dir.
+function getFolders(dir) {
+  return fs.readdirSync(dir)
+    .filter(function (file) {
+      // Make sure the file is a directory
+      return fs.statSync(path.join(dir, file)).isDirectory();
+    });
+};
+
+// Tasks
+// -----
+
+// Run tests on the core library.
 gulp.task('test', function () {
   return gulp
     .src([
@@ -11,10 +33,46 @@ gulp.task('test', function () {
     ], {read: false}).pipe(mocha({reporter: 'spec'}));
 });
 
-// Initialize Rabbit.
+// Build styles for each theme
+gulp.task('build-styles', function () {
+  var folders = getFolders('content/theme');
+  var tasks = folders.map(function (folder) {
+    var folderPath = path.join('content/theme', folder);
+    return gulp.src(path.join(folderPath, 'assets/css/stylus'))
+      .pipe(stylus({
+        compress: true
+      }))
+      .pipe(gulp.dest(path.join(folderPath, 'assets/css/style')))
+  });
+  return merge(tasks);
+});
+
+// Build the client library
+gulp.task('build-client', function () {
+  var build = ModusBuild.getInstance();
+  build.start({
+    root: __dirname + '/',
+    main: 'lib/client/main',
+    dest: 'content/theme/admin/assets/js/built.js',
+    minify: true
+  }, function (content) {
+    build.writeOutput(function () {
+      console.log('Client compiled');
+    });
+  });
+});
+
+
+/////////
+// REMOVE
+// Replace with Rabbit#firstRun
+var models = require('./lib/server/models');
 gulp.task('init', function () {
   // Create the database.
   models.install();
 })
+////////
+
 
 gulp.task('default', ['test']);
+gulp.task('build', ['build-styles', 'build-client']);
