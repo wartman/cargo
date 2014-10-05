@@ -22,7 +22,8 @@ var config = {
       port: '8080'
     },
     paths: {
-      content: path.join(__dirname, '/content/')
+      content: path.join(__dirname, '/content/'),
+      media: path.join(__dirname, '/content/media')
     }
   },
 
@@ -39,7 +40,8 @@ var config = {
       port: '8080'
     },
     paths: {
-      content: path.join(__dirname, '/content/')
+      content: path.join(__dirname, '/content/'),
+      media: path.join(__dirname, '/content/media')
     }
   },
 
@@ -56,7 +58,8 @@ var config = {
       port: '2368'
     },
     paths: {
-      content: path.join(__dirname, '/content/')
+      content: path.join(__dirname, '/content/'),
+      media: path.join(__dirname, '/content/media')
     }
   }
 

@@ -1,0 +1,34 @@
+// Config
+// ------
+// Basic configuration options for all styles.
+
+config = {
+
+  grid: {
+    // Dictates the basic height unit. Used when
+    // determining line spacing, etc. Should be used as
+    // the building-block of all heights.
+    base: 15px,
+    // Media queries. Numbers represent the mid-width each
+    // query works on.
+    media: {
+      upper: {
+        min:750,
+        max:9999px
+      },
+      mid: {
+        max:750px,
+        min: 500px
+      },
+      lower: {
+        max: 350px,
+        min: 0px
+      }
+    }
+  },
+
+  color: {
+    main: #666666
+  }
+
+}

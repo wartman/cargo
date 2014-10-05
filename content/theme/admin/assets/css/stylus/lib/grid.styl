@@ -1,0 +1,41 @@
+@import 'nib/clearfix'
+@import '../config'
+
+// Grid
+// ----
+// A simple grid system.
+
+// Create a column, where each column spans one of 'count'
+column(span, count) {
+  width: unit(((span / count) * 100), '%')
+  float: left
+}
+
+// Outputs a basic grid, where the wrapper is 'prefix-container' and
+// columns are 'prefix-item'. You'll need to set styles for each
+// column seperately.
+// You can use the default media-queries (set in '../config') or
+// pass your own.
+grid(prefix='grid', options={lower:{span:1, count:4}}, media=config.grid.media) {
+  
+  // Base elements
+  .{prefix}-container {
+    clearfix()
+    width: 100%
+  }
+  .{prefix}-item {
+    clearfix()
+  }
+
+  // Iterate over media-queries and set columns
+  for key, value in media {
+    if key in options {
+      @media screen and (max-width: value.max) and (min-width: value.min) {
+        .{prefix}-item {
+          column(options[key].span, options[key].count)
+        }
+      }
+    }
+  }
+
+}

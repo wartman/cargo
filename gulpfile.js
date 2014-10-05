@@ -4,10 +4,10 @@ var path = require('path');
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var stylus = require('gulp-stylus');
+var nib = require('nib');
+var ModusBuild = require('modus/lib/build');
 var merge = require('merge-stream');
 var config = require('./config');
-
-var ModusBuild = require('modus/lib/build');
 
 // Helpers
 // -------
@@ -26,11 +26,11 @@ function getFolders(dir) {
 
 // Run tests on the core library.
 gulp.task('test', function () {
-  return gulp
-    .src([
+  return gulp.src([
       'lib/both/test/**/test_*.js', 
       'lib/server/test/**/test_*.js'
-    ], {read: false}).pipe(mocha({reporter: 'spec'}));
+    ], {read: false})
+    .pipe(mocha({reporter: 'spec'}));
 });
 
 // Build styles for each theme
@@ -38,11 +38,12 @@ gulp.task('build-styles', function () {
   var folders = getFolders('content/theme');
   var tasks = folders.map(function (folder) {
     var folderPath = path.join('content/theme', folder);
-    return gulp.src(path.join(folderPath, 'assets/css/stylus'))
+    return gulp.src(path.join(folderPath, 'assets/css/stylus/main.styl'))
       .pipe(stylus({
-        compress: true
+        use: nib(),
+        compress: false
       }))
-      .pipe(gulp.dest(path.join(folderPath, 'assets/css/style')))
+      .pipe(gulp.dest(path.join(folderPath, 'assets/css/build')))
   });
   return merge(tasks);
 });
@@ -53,8 +54,8 @@ gulp.task('build-client', function () {
   build.start({
     root: __dirname + '/',
     main: 'lib/client/main',
-    dest: 'content/theme/admin/assets/js/built.js',
-    minify: true
+    dest: 'content/theme/admin/assets/js/build/admin.js',
+    minify: false
   }, function (content) {
     build.writeOutput(function () {
       console.log('Client compiled');
