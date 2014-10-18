@@ -1,0 +1,26 @@
+{
+
+  "users": [
+    {
+      "name": "Admin",
+      "email": "rabbit@example.com",
+      "status": "inactive"
+    }
+  ],
+
+  "roles": [
+    {
+      "name": "Administrator",
+      "description": "Administrators"
+    },
+    {
+      "name": "Reader",
+      "description": "Readers"
+    },
+    {
+      "name": "Owner",
+      "description": "Site Owner"
+    }
+  ]
+
+}

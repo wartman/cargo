@@ -1,0 +1,24 @@
+{
+
+  "core": {
+    "dbVersion": {
+      "defaultValue": "000"
+    },
+    "dbHash": {
+      "defaultValue": null
+    }
+  },
+
+  "site": {
+    "title": {
+      "defaultValue": "Rabbit"
+    },
+    "description": {
+      "defaultValue": "rabbit@example.com"
+    },
+    "activeTheme": {
+      "defaultValue": "warren"
+    }
+  }
+
+}
