@@ -33,7 +33,7 @@ var config = {
       connection: {
         filename: path.join(__dirname, '/content/data/rabbit-testing.db')
       },
-      debug: true
+      debug: false
     },
     server: {
       host: 'localhost',

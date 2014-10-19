@@ -4,6 +4,7 @@ var path = require('path');
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var stylus = require('gulp-stylus');
+var clean = require('gulp-clean');
 var nib = require('nib');
 var ModusBuild = require('modus/lib/build');
 var merge = require('merge-stream');
@@ -26,6 +27,7 @@ function getFolders(dir) {
 
 // Run tests on the core library.
 gulp.task('test', function () {
+  process.env.NODE_ENV = 'testing';
   return gulp.src([
       'lib/both/test/**/test_*.js', 
       'lib/server/test/**/test_*.js'
@@ -62,17 +64,6 @@ gulp.task('build-client', function () {
     });
   });
 });
-
-
-/////////
-// REMOVE
-// Replace with Rabbit#firstRun
-var models = require('./lib/server/models');
-gulp.task('init', function () {
-  // Create the database.
-  models.install();
-})
-////////
 
 
 gulp.task('default', ['test']);
