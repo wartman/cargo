@@ -1,11 +1,8 @@
 var path = require('path');
 
-var config = {
+// Note: the env that is run depends on the .env file.
 
-  // Uncomment depending on which state you
-  // want active.
-  env: 'development',
-  // env: 'production',
+var config = {
 
   migrations: 'content/data/migrations',
 

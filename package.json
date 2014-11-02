@@ -33,7 +33,8 @@
     "swig": "~1.4.2",
     "validator": "~3.17.0",
     "chalk": "~0.5.1",
-    "passport": "~0.2.1"
+    "passport": "~0.2.1",
+    "jajom": "git://github.com/wartman/jajom.git#v0.0.2"
   },
   "devDependencies": {
     "gulp": "~3.8.7",
