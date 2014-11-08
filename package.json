@@ -34,7 +34,10 @@
     "validator": "~3.17.0",
     "chalk": "~0.5.1",
     "passport": "~0.2.1",
-    "jajom": "git://github.com/wartman/jajom.git#v0.0.2"
+    "jajom": "git://github.com/wartman/jajom.git#v0.0.2",
+    "passport-local": "~1.0.0",
+    "express-session": "~1.9.1",
+    "express-flash": "0.0.2"
   },
   "devDependencies": {
     "gulp": "~3.8.7",

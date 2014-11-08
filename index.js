@@ -8,6 +8,7 @@ Rabbit({
   'port': '8080',
 
 	'views': path.join(__dirname, './content/theme/'),
+	'cookie secret': '[iH3U{@W%1kN:T*MoTS{|m#m5COT`M*>n~2/F<CN7__(o(uP]>{yo?g#3sU=%_TG',
 
 	'database': {
 		development: {
