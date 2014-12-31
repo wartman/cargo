@@ -1,12 +1,10 @@
 var fs = require('fs');
 var path = require('path');
-
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var stylus = require('gulp-stylus');
 var clean = require('gulp-clean');
 var nib = require('nib');
-var ModusBuild = require('modus/lib/build');
 var merge = require('merge-stream');
 var config = require('./config');
 
@@ -28,10 +26,7 @@ function getFolders(dir) {
 // Run tests on the core library.
 gulp.task('test', function () {
   process.env.NODE_ENV = 'testing';
-  return gulp.src([
-      'lib/both/test/**/test_*.js', 
-      'lib/server/test/**/test_*.js'
-    ], {read: false})
+  return gulp.src('test/**/test_*.js')
     .pipe(mocha({reporter: 'spec'}));
 });
 
@@ -50,21 +45,5 @@ gulp.task('build-styles', function () {
   return merge(tasks);
 });
 
-// Build the client library
-gulp.task('build-client', function () {
-  var build = ModusBuild.getInstance();
-  build.start({
-    root: __dirname + '/',
-    main: 'lib/client/main',
-    dest: 'content/theme/admin/assets/js/build/admin.js',
-    minify: false
-  }, function (content) {
-    build.writeOutput(function () {
-      console.log('Client compiled');
-    });
-  });
-});
-
-
 gulp.task('default', ['test']);
-gulp.task('build', ['build-styles', 'build-client']);
+gulp.task('build', ['build-styles']);
