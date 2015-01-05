@@ -2,7 +2,7 @@ var rabbit = require('../../../../')
 var fields = rabbit.db.fields
 
 // A test model
-var Test = new rabbit.db.Model('Test', {
+var Test = new rabbit.db.Schema('Test', {
   'id': fields.primaryKey(),
   'name': fields.string({nullable: false}),
   'content': fields.text(),

@@ -1,10 +1,27 @@
 var Promise = require('bluebird')
 
-module.exports = function (db, next) {
+module.exports = function (db, next, error) {
+
   var test = db.model('Test', {
-    'name': 'foo',
-    'content': 'bar',
+    'name': 'update',
+    'content': 'updated',
     'number': '1'
   })
-  test.save().then(next)
+
+  var user = db.model('User', {
+    'username': 'tester',
+    'firstname': 'Testy',
+    'lastname': 'Tester',
+    'role': 'Reader',
+    'status': 'active',
+    'email': 'tester@fake-email.org',
+    'password': 'test',
+  })
+
+  Promise.all([
+    test.save(),
+    user.save()
+  ]).then(next)
+    .catch(error)
+    
 }
