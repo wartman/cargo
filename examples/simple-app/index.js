@@ -1,22 +1,21 @@
 var rabbit = require('../../')
+var path = require('path')
 
 rabbit.init({
 
   'database': {
-    production: {
-      client: 'sqlite3',
-      connection: {
-        filename: './content/database.db'
-      },
-      debug: false
-    }
+    client: 'sqlite3',
+    connection: {
+      filename: path.join(__dirname, './content/database.db')
+    },
+    debug: false
   },
-  'updates': './updates'
-  'static': './content'
+  'updates': path.join(__dirname, './updates'),
+  'static': path.join(__dirname, './content')
 
 })
 
-rabbit.imports('./models')
+rabbit.imports('./examples/simple-app/models')
 
 rabbit.set('routes', require('./routes'))
 

@@ -8,6 +8,7 @@ module.exports = function (db, next, error) {
     'number': '1'
   })
 
+  // User used in testing
   var user = db.model('User', {
     'username': 'tester',
     'firstname': 'Testy',
@@ -23,5 +24,5 @@ module.exports = function (db, next, error) {
     user.save()
   ]).then(next)
     .catch(error)
-    
+
 }
