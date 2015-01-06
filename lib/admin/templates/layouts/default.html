@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html>
+  
+  <head>
+
+    {% block head-css %}{% endblock %}
+    {% block head-js %}{% endblock %}
+
+  </head>
+
+  <body>
+
+    <header class="navbar navbar-primary">
+      {% block header %}
+      {% endblock %}
+    </header>
+
+    <section class="main">
+      {% block content %}{% endblock %}
+    </section>
+
+    {% block footer %}
+    {% endblock %}
+
+  </body>
+
+</html>

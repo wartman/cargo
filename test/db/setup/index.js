@@ -14,14 +14,14 @@ function connectToDb () {
   // Remove an existing db
   if (fs.existsSync(testingDb)) fs.unlinkSync(testingDb)
 
-  db.set('database', {
+  db.set('db connection', {
     client: 'sqlite3',
     connection: {
       filename: testingDb
     },
     debug: false
   })
-  db.set('updates', path.join(__dirname, './updates'))
+  db.set('db updates', path.join(__dirname, './updates'))
 
   // Import test models
   var imports = rabbit.util.createImporter(__dirname)

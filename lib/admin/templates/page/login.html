@@ -1,0 +1,37 @@
+{% extends '../layouts/default.html' %}
+
+{% block header %}
+  <h1>Login</h1>
+{% endblock %}
+
+{% block content %}
+  {% if messages %}
+    <div class="messages">
+      {% for msg in messages %}
+        <p>{{msg}}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if not user.authed %}
+    <form action="login" method="post">
+
+      <ul>
+        <li class="form-item">
+          <label form="username">Username</label>
+          <input type="text" name="username" value="{{user.username}}">
+        </li>
+        <li class="form-item">
+          <label form="password">Password</label>
+          <input type="password" name="password" value="{{user.pasword}}">
+        </li>
+        <li class="form-item form-item-submit">
+          <button type="submit" name="login">Log In</button>
+        </li>
+      </ul>
+
+    </form>
+  {% else %}
+    <a href="logout">Log Out</a>
+  {% endif %}
+{% endblock %}
