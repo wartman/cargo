@@ -34,6 +34,7 @@
     "passport": "~0.2.1",
     "passport-local": "~1.0.0",
     "pluralize": "^1.1.0",
+    "semver": "^4.2.0",
     "sqlite3": "^2.2.7",
     "swig": "~1.4.2",
     "validator": "~3.17.0"
