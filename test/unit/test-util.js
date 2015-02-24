@@ -1,5 +1,5 @@
 var expect = require('expect.js')
-var rabbit = require('../')
+var rabbit = require('../../')
 var util = rabbit.util
 
 describe('rabbit.util', function () {
@@ -8,7 +8,7 @@ describe('rabbit.util', function () {
 
     it('creates an importer that loads all modules in a dir recursively', function () {
       var imports = rabbit.util.createImporter(__dirname)
-      var actual = imports('./fixtures/util/importer')
+      var actual = imports('../fixtures/util/importer')
       expect(actual).to.eql({
         foo: 'foo',
         bar: 'bar',
@@ -24,7 +24,7 @@ describe('rabbit.util', function () {
           return util.capitalize(util.camelCase(str))
         }
       })
-      var actual = imports('./fixtures/util/importer')
+      var actual = imports('../fixtures/util/importer')
       expect(actual).to.eql({
         Foo: 'foo',
         Bar: 'bar',

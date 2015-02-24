@@ -1,12 +1,11 @@
 var rabbit = require('../../../')
+var Page = require('../models/page')
 
 module.exports = function (app) { 
   app.get('/', function (req, res) {
-    rabbit.db.model('Post', {'title': 'Hello World'})
-      .fetch()
-      .then(function (model) {
-        if (!model) return res.send('not found')
-        res.send(model.get('content'))
-      })
+    var page = new Page('001')
+    page.fetch().then(function () {
+      res.render('index', page.toJSON()) 
+    })
   })
 }

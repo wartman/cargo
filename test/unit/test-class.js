@@ -1,5 +1,5 @@
 var expect = require('expect.js')
-var rabbit = require('../')
+var rabbit = require('../../')
 
 describe('rabbit.Class', function () {
 

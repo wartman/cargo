@@ -1,5 +1,6 @@
 var expect = require('expect.js')
-var Record = require('../../lib/record')
+var rabbit = require('../../../')
+var Record = rabbit.Record
 var Promise = require('bluebird')
 
 describe('Rabbit.Record.Document', function () {
@@ -9,7 +10,12 @@ describe('Rabbit.Record.Document', function () {
     it('sets initial attributes', function () {
       var attrs = {foo: 'foo', bar: 'bar'}
       var doc = new Record.Document(attrs)
-      expect(doc.attributes).to.deep.equal(attrs)
+      expect(doc.attributes).to.eql(attrs)
+    })
+
+    it('sets the ID if only a string is passed', function () {
+      var doc = new Record.Document('001.md')
+      expect(doc.id).to.equal('001')
     })
 
   })
@@ -39,9 +45,15 @@ describe('Rabbit.Record.Document', function () {
       }).to.not.throwException()
     })
 
-    it('sets the `id` attribute', function () {
+    it('sets the `id` property when the `idAttribute` is set', function () {
       doc.set(doc.idAttribute, 956)
       expect(doc.id).to.equal(956)
+        .and.to.equal(doc.attributes[doc.idAttribute])
+    })
+
+    it('removes extensions from the idAttribute', function () {
+      doc.set(doc.idAttribute, '956.md')
+      expect(doc.id).to.equal('956')
         .and.to.equal(doc.attributes[doc.idAttribute])
     })
 
@@ -51,12 +63,12 @@ describe('Rabbit.Record.Document', function () {
     var doc = new Record.Document()
 
     it('gets an attribute', function () {
-      doc.attribute.foo = 'foo'
+      doc.attributes.foo = 'foo'
       expect(doc.get('foo')).to.equal('foo') 
     })
 
-    it('returns null if no attribute exists', function () {
-      expect(doc.get('Barf')).to.be('null')
+    it('returns `undefined` if no attribute exists', function () {
+      expect(doc.get('Barf')).to.be(undefined)
     })
 
   })
@@ -74,12 +86,12 @@ describe('Rabbit.Record.Document', function () {
 
   describe('#parse', function () {
 
-    it('parses TOML and Markdown into attributes', function () {
+    it('parses YAML and Markdown into attributes', function () {
       var doc = new Record.Document()
       doc.parse([
         '---',
-        'title = "Some Title"',
-        'attachment = "some file"',
+        'title: Some Title',
+        'attachment: some file',
         '---',
         '##This is the title##',
         '',
@@ -90,12 +102,23 @@ describe('Rabbit.Record.Document', function () {
       ].join('\n'))
       expect(doc.get('title')).to.equal('Some Title')
       expect(doc.get('attachment')).to.equal('some file')
-      expect(doc.get('content')).to.equal([
-        '<h2>This is the title</h2>',
-        '<p>This is a paragraph</p>',
-        '<p>And so is this.',
-        'But this isn\'t</p>'
-      ].join('\n'))
+      expect(doc.get('body')).to.be.a('string')
+    })
+
+  })
+
+  describe('#toJSON', function () {
+
+    it('returns a copy of the attributes', function () {
+      var doc = new Record.Document({
+        foo: 'foo',
+        bar: 'bar',
+        bin: 'bin'
+      })
+      var json = doc.toJSON()
+      expect(json).to.eql(doc.attributes)
+      json.foo = 'bar'
+      expect(json).to.not.eql(doc.attributes)
     })
 
   })
@@ -105,19 +128,19 @@ describe('Rabbit.Record.Document', function () {
     // Note: see integration tests for actual implementation.
     var Tester = Record.Document.extend({
       // Overwrite the 'load' method for unit testing.
-      load: Promise.method(function (id) {
-        switch(id) {
+      load: Promise.method(function () {
+        switch(this.id) {
           case '001':
             return [
               '---',
-              'title = "Hello World"',
+              'title: Hello World',
               '---',
               'The grass is pretty green.'
             ].join('\n')
           case '002':
             return [
               '---',
-              'title = "Hello Other World',
+              'title: Hello Other World',
               '---',
               'The grass is greener here.'
             ].join('\n')

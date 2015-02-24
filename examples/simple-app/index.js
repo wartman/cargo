@@ -2,18 +2,10 @@ var rabbit = require('../../')
 var path = require('path')
 
 rabbit.init({
-  'db connection': {
-    client: 'sqlite3',
-    connection: {
-      filename: path.join(__dirname, './content/database.db')
-    },
-    debug: false
-  },
-  'db updates': path.join(__dirname, './updates'),
-  'static': path.join(__dirname, './content')
+  'module root': __dirname, // Hack to make this folder work: DON'T USE IN YOUR APP
+  'record path': 'data',
+  'static': 'public'
 })
-
-rabbit.imports('./examples/simple-app/models')
 
 rabbit.set('routes', require('./routes'))
 
