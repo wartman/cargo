@@ -1,6 +1,6 @@
 var expect = require('expect.js')
-var rabbit = require('../../../')
-var Record = rabbit.Record
+var Rabbit = require('../../../')
+var Record = Rabbit.Record
 var Promise = require('bluebird')
 
 describe('Rabbit.Record.Document', function () {

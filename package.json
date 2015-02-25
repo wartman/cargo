@@ -23,6 +23,7 @@
     "body-parser": "~1.6.5",
     "camel-case": "^1.0.2",
     "chalk": "~0.5.1",
+    "debug": "^2.1.1",
     "express": "~4.8.4",
     "express-flash": "0.0.2",
     "express-session": "~1.9.1",

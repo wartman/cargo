@@ -25,6 +25,7 @@ function getFolders(dir) {
 // Run tests on the core library.
 gulp.task('test (unit)', function () {
   process.env.NODE_ENV = 'testing'
+  process.env.DEBUG = '*'
   return gulp.src('test/unit/**/test-*.js')
     .pipe(mocha({reporter: 'spec'}))
 })

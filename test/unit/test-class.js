@@ -1,11 +1,11 @@
 var expect = require('expect.js')
-var rabbit = require('../../')
+var Rabbit = require('../../')
 
-describe('rabbit.Class', function () {
+describe('Rabbit.Class', function () {
 
   var Base
   beforeEach(function () {
-    Base = rabbit.Class.extend({
+    Base = Rabbit.Class.extend({
       constructor: function (n) {
         this.n = n
       }
@@ -15,13 +15,13 @@ describe('rabbit.Class', function () {
   describe('#extend', function () {
 
     it('creates a new class', function () {
-      var Test = rabbit.Class.extend({
+      var Test = Rabbit.Class.extend({
         constructor: function () {
           this.foo = 'foo'
         }
       })
       expect(Test).to.be.a('function')
-      expect(Test.extend).to.be(rabbit.Class.extend)
+      expect(Test.extend).to.be(Rabbit.Class.extend)
       var test = new Test()
       expect(test).to.be.a(Test)
       expect(test.foo).to.be('foo')
@@ -29,14 +29,14 @@ describe('rabbit.Class', function () {
 
     it('throws an error when trying to add properties to the prototype', function () {
       expect(function () {
-        var Bad = rabbit.Class.extend({
+        var Bad = Rabbit.Class.extend({
           foo: 'bar'
         })
       }).to.throwError(Error)
     })
 
     it('inherits instance methods', function () {
-      var Test = rabbit.Class.extend({
+      var Test = Rabbit.Class.extend({
         constructor: function (foo) {
           this.setFoo(foo)
         },
@@ -62,7 +62,7 @@ describe('rabbit.Class', function () {
         expect(called).to.be(1)
         done()
       }, 200)
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         constructor: function () {
           called += 1
         }
@@ -72,7 +72,7 @@ describe('rabbit.Class', function () {
 
     it('does not call first class\' constructor when extending', function () {
       var called = 0
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         constructor: function () {
           called += 1
         }
@@ -83,7 +83,7 @@ describe('rabbit.Class', function () {
 
     it('doesn\'t bubble constructor to sub-classes', function () {
       var called = 0
-      var Foo = rabbit.Class.extend({
+      var Foo = Rabbit.Class.extend({
         constructor: function() {
           called += 1
         }
@@ -109,7 +109,7 @@ describe('rabbit.Class', function () {
         expect(called).to.be(1)
         done()
       }, 200)
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         constructor: function () {
           called += 1
         }
@@ -125,7 +125,7 @@ describe('rabbit.Class', function () {
         expect(called).to.be(1)
         done()
       }, 200)
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         constructor: function () {
           called += 1
         }
@@ -137,7 +137,7 @@ describe('rabbit.Class', function () {
     })
 
     it('can access constructor within constructor', function () {
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         constructor: function () {
           expect(this.constructor.foo).to.be('foo')
         }
@@ -153,7 +153,7 @@ describe('rabbit.Class', function () {
     })
 
     it('should inherit super methods', function () {
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         foo: function () {
           return 'foo'
         }
@@ -170,7 +170,7 @@ describe('rabbit.Class', function () {
 
     it('does not endlessly loop', function () {
       var _called = ''
-      var Test = rabbit.Class.extend({
+      var Test = Rabbit.Class.extend({
         constructor: function () {
           _called += 'first'
         }
@@ -192,7 +192,7 @@ describe('rabbit.Class', function () {
     })
 
     it('passes arguments to super calls', function () {
-      var Test = rabbit.Class.extend({
+      var Test = Rabbit.Class.extend({
         constructor: function (foo) {
           this.setFoo(foo)
         },
@@ -218,7 +218,7 @@ describe('rabbit.Class', function () {
     it('should call super methods from sub methods (including constructor)', function () {
       var methodTimes = 0
       var constructTimes = 0
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         foo: function () {
           ++methodTimes
           expect(methodTimes).to.be(1)
@@ -254,7 +254,7 @@ describe('rabbit.Class', function () {
     })
 
     it('should access the correct super method', function () {
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         first: function () {
           return 'first'
         },
@@ -281,7 +281,7 @@ describe('rabbit.Class', function () {
 
     it('should reset when exceptions are thrown', function () {
       var caught = false
-      var Base = rabbit.Class.extend({
+      var Base = Rabbit.Class.extend({
         thrower: function () {
           throw new Exception()
         },

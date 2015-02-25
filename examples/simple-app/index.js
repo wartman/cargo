@@ -1,12 +1,9 @@
-var rabbit = require('../../')
-var path = require('path')
+var Rabbit = require('../../')
 
-rabbit.init({
+Rabbit({
   'module root': __dirname, // Hack to make this folder work: DON'T USE IN YOUR APP
   'record path': 'data',
-  'static': 'public'
-})
-
-rabbit.set('routes', require('./routes'))
-
-rabbit.run()
+  'static path': 'public',
+  'models': require('./models'),
+  'routes': require('./routes')
+}).run()

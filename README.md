@@ -8,3 +8,15 @@ and do something more reasonable but, hey, it'll work.
 
 Only very basic functionality in right now. Probably good enough for
 a small portfolio site (once static-file serving is up and running).
+
+```
+var Rabbit = require('rabbit')
+
+Rabbit({
+  'record path': 'data',
+  'static path': 'public',
+  'models': require('./models'),
+  'routes': require('./routes')
+}).run()
+
+```
