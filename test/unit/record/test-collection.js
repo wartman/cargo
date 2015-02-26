@@ -93,6 +93,23 @@ describe('Rabbit.Record.Collection', function () {
 
   })
 
+  describe('#toJSON', function () {
+
+    it('outputs documents as JSON', function () {
+      var collection = new Record.Collection()
+      collection
+        .add({id:1, value: 'foo'})
+        .add({id:2, value: 'bar'})
+        .add({id:3, value: 'bax'})
+      expect(collection.toJSON()).to.eql([
+        {id:1, value: 'foo'},
+        {id:2, value: 'bar'},
+        {id:3, value: 'bax'}
+      ])
+    })
+
+  })
+
   describe('#each', function () {
 
     it('iterates over registered Documents', function () {
@@ -134,9 +151,8 @@ describe('Rabbit.Record.Collection', function () {
 
     it('loads all files in a collection', function (done) {
       var collection = new Test('bar')
-      collection.fetch().then(function (documents) {
-        expect(documents).to.be.an('array')
-        expect(documents).to.eql(collection.documents)
+      collection.fetch().then(function (arg) {
+        expect(arg).to.eql(collection)
         expect(collection.get('001')).to.be.a(Record.Document)
         expect(collection.get('002')).to.be.a(Record.Document)
         done()

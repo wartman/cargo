@@ -15,7 +15,8 @@ describe('Rabbit.Record', function () {
   
   it('loads files and parses them', function (done) {
     var collection = record.collections.test()
-    collection.fetch().then(function () {
+    collection.fetch().then(function (arg) {
+      expect(arg).to.eql(collection)
       expect(collection.get('001')).to.be.a(Record.Document)
       expect(collection.get('002')).to.be.a(Record.Document)
       expect(collection.get('001').get('name')).to.be('First')
