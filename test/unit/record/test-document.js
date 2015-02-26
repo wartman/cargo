@@ -166,4 +166,3 @@ describe('Rabbit.Record.Document', function () {
 // @todo
 // For the next release:
 // #save
-// #pre and #post

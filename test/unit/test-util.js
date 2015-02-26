@@ -28,7 +28,7 @@ describe('Rabbit.util', function () {
       expect(actual).to.eql({
         Foo: 'foo',
         Bar: 'bar',
-        recur: {
+        Recur: {
           FooBar: 'bar'
         }
       })
