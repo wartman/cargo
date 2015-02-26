@@ -19,10 +19,12 @@ describe('Rabbit.Record.IO', function () {
 
     it('loads an entire collection if no file is passed', function (done) {
       io.load('test').then(function (files) {
-        expect(files).to.be.an('object')
+        expect(files).to.be.an('array')
         // Note: these tests need to be more detailed. Already screwed me up once.
-        expect(files['001.md']).to.be.a('string')
-        expect(files['002.md']).to.be.a('string')
+        expect(files[0].filename).to.equal('001.md')
+        expect(files[0].contents).to.be.a('string')
+        expect(files[1].filename).to.equal('002.md')
+        expect(files[1].contents).to.be.a('string')
         done()
       }).catch(done)
     })
@@ -55,6 +57,17 @@ describe('Rabbit.Record.IO', function () {
     it('filters for files that contain a match', function () {
       expect(io.query({contains: 'hello'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
         .to.eql(['001.hello.md', '003.hello-man.md'])
+    })
+
+    it('discovers files by name', function () {
+      // Unlike `contains`, will EXACTLY match.
+      expect(io.query({name: 'hello'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
+        .to.eql(['001.hello.md'])
+    })
+
+    it('discovers files by ID', function () {
+      expect(io.query({id: '002'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
+        .to.eql(['002.goodbye.md'])
     })
 
   })

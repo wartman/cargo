@@ -127,20 +127,26 @@ describe('Rabbit.Record.Collection', function () {
   })
 
   describe('#fetch', function () {
-    var fixtures = {
-      '001.md': [
-        '---',
-        'title: Hello World',
-        '---',
-        'The grass is pretty green.'
-      ].join('\n'),
-      '002.md': [
-        '---',
-        'title: Hello World Again',
-        '---',
-        'The grass is greener.'
-      ].join('\n')
-    }
+    var fixtures = [
+      {
+        filename: '001.md',
+        contents: [
+          '---',
+          'title: Hello World',
+          '---',
+          'The grass is pretty green.'
+        ].join('\n')
+      },
+      {
+        filename: '002.md',
+        contents: [
+          '---',
+          'title: Hello World Again',
+          '---',
+          'The grass is greener.'
+        ].join('\n')
+      }
+    ]
 
     // Override the loader with a test
     var Test = Record.Collection.extend({
