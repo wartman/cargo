@@ -12,6 +12,21 @@ describe('Rabbit.Record.Collection', function () {
       expect(collection.path).to.equal('foo')
     })
 
+    it('uses a registered document\'s path if one is not provided', function () {
+      var Test = Record.Document.extend({
+        init: function () {
+          this.path = 'foo/bar'
+        }
+      })
+      var TestCollection = Record.Collection.extend({
+        init: function () {
+          this.document = Test
+        }
+      })
+      var test = new TestCollection()
+      expect(test.path).to.equal('foo/bar')
+    })
+
   })
 
   describe('#add', function () {
