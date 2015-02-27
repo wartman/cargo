@@ -15,9 +15,16 @@ describe('Rabbit.Record', function () {
   record.use('advanced', Record.Collection.extend({
     init: function () {
       this.path = 'advanced'
+      this.$map = {id: 0, name: 1}
     }
   }))
-  
+  record.use('customMap', Record.Collection.extend({
+    init: function () {
+      this.path = 'custom-map'
+      this.$map = {subCategory:0, id: 1, name: 2}
+    }
+  }))
+
   it('loads files and parses them', function (done) {
     var collection = record.collections.test()
     collection.fetch().then(function (arg) {
@@ -35,6 +42,7 @@ describe('Rabbit.Record', function () {
       .query({name: 'bar'})
       .fetch()
       .then(function (collection) {
+        expect(collection.get('001')).to.be.an('undefined')
         expect(collection.get('002')).to.be.a(Record.Document)
         expect(collection.get('002').get('name')).to.be('bar')
         done()
@@ -43,12 +51,24 @@ describe('Rabbit.Record', function () {
 
   it('limits using queries', function (done) {
     record.collections.advanced()
-      .query({start: '002', limit: 2})
+      .query({$startAtId: '002', $limit: 2})
       .fetch()
       .then(function (collection) {
         expect(collection.get('001')).to.be.an('undefined')
         expect(collection.get('002')).to.be.a(Record.Document)
         expect(collection.get('003')).to.be.a(Record.Document)
+        done()
+      }).catch(done)
+  })
+
+  it('uses custom maps', function (done) {
+    record.collections.customMap()
+      .query({subCategory: 'foo'})
+      .fetch()
+      .then(function (collection) {
+        expect(collection.documents.length).to.equal(2)
+        expect(collection.get('001').get('subCategory')).to.equal('foo')
+        expect(collection.get('002').get('subCategory')).to.equal('foo')
         done()
       }).catch(done)
   })

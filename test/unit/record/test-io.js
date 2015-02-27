@@ -49,25 +49,30 @@ describe('Rabbit.Record.IO', function () {
 
   describe('#query', function () {
 
-    it('filters an array of filenames based on start and limit', function () {
-      expect(io.query({start: '002', limit: 3}, ['001.md', '002.hey.md', '003.md', '004.md', '005.md', '006.md']))
+    it('filters an array of filenames based on `$startAtId` and `$limit`', function () {
+      expect(io.query({$startAtId: '002', $limit: 3}, ['001.md', '002.hey.md', '003.md', '004.md', '005.md', '006.md']))
+        .to.eql(['002.hey.md', '003.md', '004.md'])
+    })
+
+    it('filters an array of filenames based on `$startAtIndex` and `$limit`', function () {
+      // Remember: 0-indexed!
+      expect(io.query({$startAtIndex: 1, $limit: 3}, ['001.md', '002.hey.md', '003.md', '004.md', '005.md', '006.md']))
         .to.eql(['002.hey.md', '003.md', '004.md'])
     })
 
     it('filters for files that contain a match', function () {
-      expect(io.query({contains: 'hello'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
-        .to.eql(['001.hello.md', '003.hello-man.md'])
+      expect(io.query({$contains: 'hello'}, ['001.hello.md', '002.goodbye.md', '003.foo.hello.md']))
+        .to.eql(['001.hello.md', '003.foo.hello.md'])
     })
 
-    it('discovers files by name', function () {
-      // Unlike `contains`, will EXACTLY match.
-      expect(io.query({name: 'hello'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
-        .to.eql(['001.hello.md'])
-    })
-
-    it('discovers files by ID', function () {
+    it('discovers files by ID automatically (assumes id position === 1, and the id attribute === "id")', function () {
       expect(io.query({id: '002'}, ['001.hello.md', '002.goodbye.md', '003.hello-man.md']))
         .to.eql(['002.goodbye.md'])
+    })
+
+    it('can create custom searches with `$map`', function () {
+      expect(io.query({name: 'foo', cat: 'bar', $map: {name: 1, cat: 2}}, ['001.foo.bin.md', '002.foo.bar.md']))
+        .to.eql(['002.foo.bar.md'])
     })
 
   })

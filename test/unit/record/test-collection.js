@@ -60,6 +60,19 @@ describe('Rabbit.Record.Collection', function () {
       expect(collection.get('002').get('foo')).to.equal('bin')
     })
 
+    it('causes child-documents to inherit it\'s $map, path, etc.', function () {
+      var Test = Record.Collection.extend({
+        init: function () {
+          this.path = 'foo/bar'
+          this.$map = {id: 0, name: 1, bar: 2}
+        }
+      })
+      var test = new Test()
+      test.add({id: '001', name: 'foo'})
+      expect(test.get('001').$map).to.eql(test.$map)
+      expect(test.get('001').path).to.eql(test.path)
+    })
+
   })
 
   describe('#get', function () {

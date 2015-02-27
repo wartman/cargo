@@ -13,9 +13,23 @@ describe('Rabbit.Record.Document', function () {
       expect(doc.attributes).to.eql(attrs)
     })
 
-    it('sets the ID if only a string is passed', function () {
+    it('sets attributes if only a string is passed', function () {
       var doc = new Record.Document('001.md')
       expect(doc.id).to.equal('001')
+    })
+
+  })
+
+  describe('#parseFilename', function () {
+
+    it('parses a filename based on the current $map', function () {
+      var Test = Record.Document.extend({
+        init: function () {
+          this.$map = {id:0, name:1}
+        }
+      })
+      var test = new Test()
+      expect(test.parseFilename('001.foo.md')).to.eql({id:'001', name: 'foo'})
     })
 
   })
@@ -48,12 +62,6 @@ describe('Rabbit.Record.Document', function () {
     it('sets the `id` property when the `idAttribute` is set', function () {
       doc.set(doc.idAttribute, 956)
       expect(doc.id).to.equal(956)
-        .and.to.equal(doc.attributes[doc.idAttribute])
-    })
-
-    it('removes extensions from the idAttribute', function () {
-      doc.set(doc.idAttribute, '956.md')
-      expect(doc.id).to.equal('956')
         .and.to.equal(doc.attributes[doc.idAttribute])
     })
 
