@@ -1,5 +1,5 @@
-Rabbit
-======
+Cargo
+=====
 
 A dumb flat-file `cms`.
 
@@ -10,11 +10,11 @@ Only very basic functionality in right now. Probably good enough for
 a small portfolio site.
 
 ```
-var Rabbit = require('rabbit')
+var Cargo = require('cargo')
 
-Rabbit({
+Cargo({
 
-  'record path': 'data',
+  'manifest path': 'data',
   'static path': 'public',
 
   'models': require('./models'),

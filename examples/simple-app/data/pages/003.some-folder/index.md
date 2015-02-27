@@ -3,7 +3,7 @@ title: Some Folder
 ---
 This doesn't work yet, but it would be neat to allow folders like this.
 
-Perhaps Record.IO can run fs.statSync, then check for 'index.md' (as the default) and 
+Perhaps Manifest.IO can run fs.statSync, then check for 'index.md' (as the default) and 
 any files (like images) that are hanging out in the same folder? It could always return an
 object structured like so:
 

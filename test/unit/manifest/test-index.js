@@ -1,8 +1,8 @@
 var expect = require('expect.js')
-var Rabbit = require('../../../')
-var Record = Rabbit.Record
+var Cargo = require('../../../')
+var Manifest = Cargo.Manifest
 
-describe('Rabbit.Record', function () {
+describe('Cargo.Manifest', function () {
   
   describe('#constructor', function () {
 
@@ -14,33 +14,33 @@ describe('Rabbit.Record', function () {
 
   describe('#use', function () {
 
-    var record
+    var manifest
     var Test
 
     beforeEach(function () {
-      record = new Record({
+      manifest = new Manifest({
         'base path': 'test/path'
       })
-      Test = Record.Document.extend({
+      Test = Manifest.Document.extend({
         init: function () {
           this.path = 'test'
         }
       })
-      record.use('test', Test)
+      manifest.use('test', Test)
     })
 
     it('registers documents', function () {
-      expect(record.documents.test).to.be.a('function')
-      expect(record.documents.test()).to.be.a(Test)
-      expect(record.documents.test({
+      expect(manifest.documents.test).to.be.a('function')
+      expect(manifest.documents.test()).to.be.a(Test)
+      expect(manifest.documents.test({
         'id': '001', 
         'foo': 'bar'
       }).get('foo')).to.equal('bar')
     })
 
     it('registered documents have the correct IO', function () {
-      expect(record.documents.test().io).to.eql(record.io)
-      expect(record.documents.test().io.get('base path')).to.equal('test/path')
+      expect(manifest.documents.test().io).to.eql(manifest.io)
+      expect(manifest.documents.test().io.get('base path')).to.equal('test/path')
     })
 
     // @todo test collections

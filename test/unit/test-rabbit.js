@@ -1,13 +1,13 @@
 var expect = require('expect.js')
-var Rabbit = require('../../')
+var Cargo = require('../../')
 
-describe('Rabbit', function () {
+describe('Cargo', function () {
 
   describe('#constructor', function () {
 
     it('returns an instance without `new`', function () {
-      var rabbit = Rabbit()
-      expect(rabbit).to.be.a(Rabbit)
+      var cargo = Cargo()
+      expect(cargo).to.be.a(Cargo)
     })
 
   })

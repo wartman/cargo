@@ -1,20 +1,20 @@
 var expect = require('expect.js')
-var Rabbit = require('../../../')
-var Record = Rabbit.Record
+var Cargo = require('../../../')
+var Manifest = Cargo.Manifest
 var Promise = require('bluebird')
 
-describe('Rabbit.Record.Document', function () {
+describe('Cargo.Manifest.Document', function () {
   
   describe('#constructor', function () {
 
     it('sets initial attributes', function () {
       var attrs = {foo: 'foo', bar: 'bar'}
-      var doc = new Record.Document(attrs)
+      var doc = new Manifest.Document(attrs)
       expect(doc.attributes).to.eql(attrs)
     })
 
     it('sets attributes if only a string is passed', function () {
-      var doc = new Record.Document('001.md')
+      var doc = new Manifest.Document('001.md')
       expect(doc.id).to.equal('001')
     })
 
@@ -23,7 +23,7 @@ describe('Rabbit.Record.Document', function () {
   describe('#parseFilename', function () {
 
     it('parses a filename based on the current $map', function () {
-      var Test = Record.Document.extend({
+      var Test = Manifest.Document.extend({
         init: function () {
           this.$map = {id:0, name:1}
         }
@@ -35,7 +35,7 @@ describe('Rabbit.Record.Document', function () {
   })
 
   describe('#set', function () {
-    var doc = new Record.Document({})
+    var doc = new Manifest.Document({})
 
     it('sets an attribute', function () {
       doc.set('foo', 'bar')
@@ -68,7 +68,7 @@ describe('Rabbit.Record.Document', function () {
   })
 
   describe('#get', function () {
-    var doc = new Record.Document()
+    var doc = new Manifest.Document()
 
     it('gets an attribute', function () {
       doc.attributes.foo = 'foo'
@@ -82,7 +82,7 @@ describe('Rabbit.Record.Document', function () {
   })
 
   describe('#has', function () {
-    var doc = new Record.Document()
+    var doc = new Manifest.Document()
 
     it('returns true or false if an attribute exists/does not exist', function () {
       doc.set('foo', 'foo')
@@ -95,7 +95,7 @@ describe('Rabbit.Record.Document', function () {
   describe('#parse', function () {
 
     it('parses YAML and Markdown into attributes', function () {
-      var doc = new Record.Document()
+      var doc = new Manifest.Document()
       doc.parse([
         '---',
         'title: Some Title',
@@ -118,7 +118,7 @@ describe('Rabbit.Record.Document', function () {
   describe('#toJSON', function () {
 
     it('returns a copy of the attributes', function () {
-      var doc = new Record.Document({
+      var doc = new Manifest.Document({
         foo: 'foo',
         bar: 'bar',
         bin: 'bin'
@@ -134,7 +134,7 @@ describe('Rabbit.Record.Document', function () {
   describe('#fetch', function () {
 
     // Note: see integration tests for actual implementation.
-    var Tester = Record.Document.extend({
+    var Tester = Manifest.Document.extend({
       // Overwrite the 'load' method for unit testing.
       load: Promise.method(function () {
         switch(this.id) {

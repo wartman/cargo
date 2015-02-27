@@ -1,8 +1,8 @@
-var Rabbit = require('../../')
+var Cargo = require('../../')
 
-Rabbit({
+Cargo({
   'module root': __dirname, // Hack to make this folder work: DON'T USE IN YOUR APP
-  'record path': 'data',
+  'manifest path': 'data',
   'static path': 'public',
   'models': require('./models'),
   'routes': require('./routes')

@@ -1,5 +1,5 @@
 var Page = require('./page')
 
-module.exports = function (record) {
-  record.use('page', Page)
+module.exports = function (manifest) {
+  manifest.use('page', Page)
 }

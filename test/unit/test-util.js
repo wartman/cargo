@@ -1,13 +1,13 @@
 var expect = require('expect.js')
-var Rabbit = require('../../')
-var util = Rabbit.util
+var Cargo = require('../../')
+var util = Cargo.util
 
-describe('Rabbit.util', function () {
+describe('Cargo.util', function () {
 
   describe('#createImporter', function () {
 
     it('creates an importer that loads all modules in a dir recursively', function () {
-      var imports = Rabbit.util.createImporter(__dirname)
+      var imports = Cargo.util.createImporter(__dirname)
       var actual = imports('../fixtures/util/importer')
       expect(actual).to.eql({
         foo: 'foo',
@@ -19,7 +19,7 @@ describe('Rabbit.util', function () {
     })
 
     it('can use a transform option', function () {
-      var imports = Rabbit.util.createImporter(__dirname, {
+      var imports = Cargo.util.createImporter(__dirname, {
         transform: function (str) {
           return util.capitalize(util.camelCase(str))
         }

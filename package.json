@@ -1,5 +1,5 @@
 {
-  "name": "rabbit",
+  "name": "cargo",
   "version": "0.0.1",
   "description": "A dumb flat-file `cms`",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wartman/rabbit.git"
+    "url": "https://github.com/wartman/cargo.git"
   },
   "author": "wartman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wartman/rabbit/issues"
+    "url": "https://github.com/wartman/cargo/issues"
   },
-  "homepage": "https://github.com/wartman/rabbit",
+  "homepage": "https://github.com/wartman/cargo",
   "dependencies": {
     "bcryptjs": "~2.0.2",
     "bluebird": "~2.3.1",

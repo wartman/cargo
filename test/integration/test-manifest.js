@@ -1,24 +1,24 @@
 var expect = require('expect.js')
-var Rabbit = require('../../')
-var Record = Rabbit.Record
+var Cargo = require('../../')
+var Manifest = Cargo.Manifest
 
-describe('Rabbit.Record', function () {
+describe('Cargo.Manifest', function () {
   
-  var record = new Record({
+  var manifest = new Manifest({
     'base path': __dirname + '/../fixtures/data'
   })
-  record.use('test', Record.Collection.extend({
+  manifest.use('test', Manifest.Collection.extend({
     init: function () {
       this.path = 'test'
     }
   }))
-  record.use('advanced', Record.Collection.extend({
+  manifest.use('advanced', Manifest.Collection.extend({
     init: function () {
       this.path = 'advanced'
       this.$map = {id: 0, name: 1}
     }
   }))
-  record.use('customMap', Record.Collection.extend({
+  manifest.use('customMap', Manifest.Collection.extend({
     init: function () {
       this.path = 'custom-map'
       this.$map = {subCategory:0, id: 1, name: 2}
@@ -26,11 +26,11 @@ describe('Rabbit.Record', function () {
   }))
 
   it('loads files and parses them', function (done) {
-    var collection = record.collections.test()
+    var collection = manifest.collections.test()
     collection.fetch().then(function (arg) {
       expect(arg).to.eql(collection)
-      expect(collection.get('001')).to.be.a(Record.Document)
-      expect(collection.get('002')).to.be.a(Record.Document)
+      expect(collection.get('001')).to.be.a(Manifest.Document)
+      expect(collection.get('002')).to.be.a(Manifest.Document)
       expect(collection.get('001').get('name')).to.be('First')
       expect(collection.get('002').get('name')).to.be('Second')
       done()
@@ -38,31 +38,31 @@ describe('Rabbit.Record', function () {
   })
 
   it('loads using queries', function (done) {
-    record.collections.advanced()
+    manifest.collections.advanced()
       .query({name: 'bar'})
       .fetch()
       .then(function (collection) {
         expect(collection.get('001')).to.be.an('undefined')
-        expect(collection.get('002')).to.be.a(Record.Document)
+        expect(collection.get('002')).to.be.a(Manifest.Document)
         expect(collection.get('002').get('name')).to.be('bar')
         done()
       }).catch(done)
   })
 
   it('limits using queries', function (done) {
-    record.collections.advanced()
+    manifest.collections.advanced()
       .query({$startAtId: '002', $limit: 2})
       .fetch()
       .then(function (collection) {
         expect(collection.get('001')).to.be.an('undefined')
-        expect(collection.get('002')).to.be.a(Record.Document)
-        expect(collection.get('003')).to.be.a(Record.Document)
+        expect(collection.get('002')).to.be.a(Manifest.Document)
+        expect(collection.get('003')).to.be.a(Manifest.Document)
         done()
       }).catch(done)
   })
 
   it('uses custom maps', function (done) {
-    record.collections.customMap()
+    manifest.collections.customMap()
       .query({subCategory: 'foo'})
       .fetch()
       .then(function (collection) {
