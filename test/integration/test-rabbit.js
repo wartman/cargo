@@ -1,3 +1,4 @@
+var _ = require('lodash')
 var express = require('express')
 var expect = require('expect.js')
 var request = require('supertest')
@@ -72,6 +73,19 @@ describe('Cargo', function () {
       request(testApp)
         .get('/testable/hello')
         .expect('hello world', done)
+    })
+
+  })
+
+  describe('#_autoloadModels', function () {
+
+    it('will load all models in a directory if a path is passed to "models"', function () {
+      var cargo = new Cargo(_.extend(rabbitOptions, {
+        models: 'fixtures/models'
+      }))
+      cargo._autoloadModels(cargo.get('models'))
+      expect(cargo.manifest.documents.test()).to.be.a(Cargo.Manifest.Document)
+      expect(cargo.manifest.collections.testCollection()).to.be.a(Cargo.Manifest.Collection)
     })
 
   })

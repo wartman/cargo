@@ -38,7 +38,35 @@ describe('Cargo.Manifest', function () {
       }).get('foo')).to.equal('bar')
     })
 
-    it('registered documents have the correct IO', function () {
+    it('registers documents and collections using objects', function () {
+      manifest.use({
+        foo: Manifest.Document.extend(),
+        bar: Manifest.Document.extend(),
+        collect: Manifest.Collection.extend()
+      })
+      expect(manifest.documents.foo()).to.be.a(Manifest.Document)
+      expect(manifest.documents.bar()).to.be.a(Manifest.Document)
+      expect(manifest.collections.collect()).to.be.a(Manifest.Collection)
+    })
+
+    it('registers documents and collections using nested objects', function () {
+      manifest.use({
+        foo: Manifest.Document.extend(),
+        bax: {
+          fib: {
+            bar: Manifest.Document.extend(),
+          }
+        },
+        bin: {
+          collect: Manifest.Collection.extend()
+        }
+      })
+      expect(manifest.documents.foo()).to.be.a(Manifest.Document)
+      expect(manifest.documents.bar()).to.be.a(Manifest.Document)
+      expect(manifest.collections.collect()).to.be.a(Manifest.Collection)
+    })
+
+    it('sets up documents to use the correct IO', function () {
       expect(manifest.documents.test().io).to.eql(manifest.io)
       expect(manifest.documents.test().io.get('base path')).to.equal('test/path')
     })

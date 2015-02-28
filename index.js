@@ -1,4 +1,5 @@
 var path = require('path')
+var Cargo = require('./lib/cargo')
 
 process.env.CARGO_MODULE_ROOT || (process.env.CARGO_MODULE_ROOT = (function(_rootPath) {
   var parts = _rootPath.split(path.sep)
@@ -7,4 +8,4 @@ process.env.CARGO_MODULE_ROOT || (process.env.CARGO_MODULE_ROOT = (function(_roo
   return modulePath
 })(module.parent ? module.parent.paths[0] : module.paths[0]))
 
-module.exports = require('./lib/cargo')
+module.exports = Cargo
