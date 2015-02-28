@@ -24,7 +24,7 @@ Cargo({
 ```
 
 Manifest
-========
+--------
 > Just rambling here for the moment
 
 `Manifest` is Cargo's file-loading API. Using it should be familiar
@@ -40,9 +40,11 @@ module.exports = function (req, res) {
   // `document` is a generic instance of `Manifest.Document`.
   // We're telling it here to load the file '001.*.md' from the folder 'some-folder'
   // in the directory we supplied to Cargo's constructor ("data", in this case)
-  req.documents.document(req.params.id, {path: 'some-folder'}).fetch().then(function (doc) {
-    res.render('index', doc.toJSON())
-  }).catch(res.handleError)
+  req.documents.document(req.params.id, {path: 'some-folder'})
+    .fetch()
+    .then(function (doc) {
+      res.render('index', doc.toJSON())
+    }).catch(res.handleError)
 }
 ```
 
