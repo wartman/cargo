@@ -4,9 +4,7 @@ Cargo
 > Still very much a work in progress: everything here is subject
 > to change.
 
-A simple flat-file framework. It allows you to quickly setup a 
-site using a ORM-like API to load markdown files with
-YAML frontmatter.
+A simple flat-file framework.
 
 ```javascript
 var Cargo = require('cargo')
@@ -23,13 +21,13 @@ Cargo({
 
 ```
 
-Manifest
---------
+Cargo.Manifest
+--------------
 > Just rambling here for the moment
 
-`Manifest` is Cargo's file-loading API. Using it should be familiar
-if you've used Backbone or any other ORM. `Manifest.Documents` represent
-single files, while `Manifest.Collections` represent folders.
+Loading files in Cargo should feel familiar if you've ever used Backbone, 
+or an ORM/ODM. `Manifest.Documents` represent single files (think `Models`), 
+while `Manifest.Collections` represent folders.
 
 The quickest way to start using Manifest is with the 'documents' and 'collections'
 properties available in routes:
