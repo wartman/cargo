@@ -12,7 +12,9 @@ describe('Cargo.Manifest.IO', function () {
 
     it('loads files relative to the `base path` and provided collection', function (done) {
       io.load('test', '001').then(function (file) {
-        expect(file).to.be.a('string')
+        expect(file).to.be.a('object')
+        expect(file.filename).to.be.a('string')
+        expect(file.contents).to.be.a('string')
         done()
       }).catch(done)
     })
@@ -31,7 +33,8 @@ describe('Cargo.Manifest.IO', function () {
 
     it('filters query if passed', function (done) {
       io.load('test', {query: {id: '001'}, single: true}).then(function (file) {
-        expect(file).to.be.a('string')
+        expect(file.filename).to.equal('001.md')
+        expect(file.contents).to.be.a('string')
         done()
       }).catch(done)
     })
